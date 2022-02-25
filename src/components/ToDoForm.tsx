@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { SetterOrUpdater, useSetRecoilState } from "recoil";
-import { ToDoInterface, todoState } from "../atoms";
+import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from "recoil";
+import { filteredTodoState, ToDoInterface, todoState } from "../atoms";
 
 interface FormData {
   text: string;
@@ -16,6 +16,8 @@ const ToDoForm = () => {
     defaultValues: { text: "" },
   });
   const setTodo: SetterOrUpdater<ToDoInterface[]> = useSetRecoilState(todoState);
+  const filteredTodo: ToDoInterface[][] = useRecoilValue(filteredTodoState);
+  console.log("filteredTodo", filteredTodo);
 
   const onValid = ({ text }: FormData) => {
     setTodo((todo: ToDoInterface[]) => [{ id: Date.now(), text, category: "TODO" }, ...todo]);
