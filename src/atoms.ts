@@ -12,9 +12,12 @@ export interface ToDoInterface {
   category: Category;
 }
 
+export const TODO_LIST = "TODO_LIST";
+const localStorageToDoList: ToDoInterface[] | [] = JSON.parse(localStorage.getItem("TODO_LIST") as string) || [];
+
 export const categoryState = atom<ToDoInterface["category"]>({ key: "categoryState", default: Category.TODO });
 
-export const todoState = atom<ToDoInterface[]>({ key: "todoState", default: [] });
+export const todoState = atom<ToDoInterface[]>({ key: "todoState", default: localStorageToDoList });
 
 export const filteredTodoState: RecoilValueReadOnly<ToDoInterface[]> = selector({
   key: "filteredTodoState",

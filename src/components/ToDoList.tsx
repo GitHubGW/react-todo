@@ -12,7 +12,7 @@ const ToDoList = () => {
       <h1>✏️ To Do List</h1>
       <SelectForm />
       <ToDoForm />
-      {filteredTodo.map((todo) => (
+      {filteredTodo.map((todo: ToDoInterface) => (
         <ToDo key={todo.id} {...todo} />
       ))}
     </div>

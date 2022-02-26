@@ -1,7 +1,8 @@
-import { SetterOrUpdater, useSetRecoilState } from "recoil";
-import { Category, ToDoInterface, todoState } from "../atoms";
+import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from "recoil";
+import { Category, ToDoInterface, todoState, TODO_LIST } from "../atoms";
 
 const ToDo = ({ id, category, text }: ToDoInterface) => {
+  const todo: ToDoInterface[] = useRecoilValue(todoState);
   const setTodo: SetterOrUpdater<ToDoInterface[]> = useSetRecoilState(todoState);
 
   const handleChangeCategory = (category: Category): void => {
@@ -11,17 +12,20 @@ const ToDo = ({ id, category, text }: ToDoInterface) => {
       const backTodo: ToDoInterface[] = todo.slice(foundTodoIndex + 1);
       const newTodo: ToDoInterface = { id, text, category };
       const newTodoList: ToDoInterface[] = [...frontTodo, newTodo, ...backTodo];
+      localStorage.setItem(TODO_LIST, JSON.stringify(newTodoList));
       return newTodoList;
     });
   };
 
   const handleDeleteTodoItem = (id: number): void => {
-    return setTodo((todo: ToDoInterface[]) => todo.filter((todoItem: ToDoInterface) => todoItem.id !== id));
+    const filteredTodo: ToDoInterface[] = todo.filter((todoItem: ToDoInterface) => todoItem.id !== id);
+    setTodo(filteredTodo);
+    localStorage.setItem(TODO_LIST, JSON.stringify(filteredTodo));
   };
 
   return (
     <li>
-      <span style={{ marginRight: "30px" }}>{text}</span>
+      <span style={{ marginRight: "30px", fontSize: "18px", fontWeight: "bold" }}>{text}</span>
       {category !== Category.TODO && (
         <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.TODO)}>
           To Do
