@@ -4,7 +4,7 @@ import { Category, ToDoInterface, todoState } from "../atoms";
 const ToDo = ({ id, category, text }: ToDoInterface) => {
   const setTodo: SetterOrUpdater<ToDoInterface[]> = useSetRecoilState(todoState);
 
-  const handleChangeCategory = (category: Category) => {
+  const handleChangeCategory = (category: Category): void => {
     setTodo((todo: ToDoInterface[]) => {
       const foundTodoIndex: number = todo.findIndex((todoItem: ToDoInterface) => todoItem.id === id);
       const frontTodo: ToDoInterface[] = todo.slice(0, foundTodoIndex);
@@ -13,6 +13,10 @@ const ToDo = ({ id, category, text }: ToDoInterface) => {
       const newTodoList: ToDoInterface[] = [...frontTodo, newTodo, ...backTodo];
       return newTodoList;
     });
+  };
+
+  const handleDeleteTodoItem = (id: number): void => {
+    return setTodo((todo: ToDoInterface[]) => todo.filter((todoItem: ToDoInterface) => todoItem.id !== id));
   };
 
   return (
@@ -33,6 +37,9 @@ const ToDo = ({ id, category, text }: ToDoInterface) => {
           Done
         </button>
       )}
+      <button style={{ margin: "5px" }} onClick={() => handleDeleteTodoItem(id)}>
+        ❎
+      </button>
     </li>
   );
 };
