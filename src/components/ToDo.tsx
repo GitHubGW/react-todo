@@ -1,10 +1,10 @@
 import { SetterOrUpdater, useSetRecoilState } from "recoil";
-import { ToDoInterface, todoState } from "../atoms";
+import { Category, ToDoInterface, todoState } from "../atoms";
 
 const ToDo = ({ id, category, text }: ToDoInterface) => {
   const setTodo: SetterOrUpdater<ToDoInterface[]> = useSetRecoilState(todoState);
 
-  const handleChangeCategory = (category: ToDoInterface["category"]) => {
+  const handleChangeCategory = (category: Category) => {
     setTodo((todo: ToDoInterface[]) => {
       const foundTodoIndex: number = todo.findIndex((todoItem: ToDoInterface) => todoItem.id === id);
       const frontTodo: ToDoInterface[] = todo.slice(0, foundTodoIndex);
@@ -17,12 +17,22 @@ const ToDo = ({ id, category, text }: ToDoInterface) => {
 
   return (
     <li>
-      <span>
-        {id}: {category}: {text}
-      </span>
-      {category !== "TODO" && <button onClick={() => handleChangeCategory("TODO")}>To Do</button>}
-      {category !== "DOING" && <button onClick={() => handleChangeCategory("DOING")}>Doing</button>}
-      {category !== "DONE" && <button onClick={() => handleChangeCategory("DONE")}>Done</button>}
+      <span style={{ marginRight: "30px" }}>{text}</span>
+      {category !== Category.TODO && (
+        <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.TODO)}>
+          To Do
+        </button>
+      )}
+      {category !== Category.DOING && (
+        <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.DOING)}>
+          Doing
+        </button>
+      )}
+      {category !== Category.DONE && (
+        <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.DONE)}>
+          Done
+        </button>
+      )}
     </li>
   );
 };
