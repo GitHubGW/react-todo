@@ -4,7 +4,7 @@ import SelectForm from "./SelectForm";
 import ToDo from "./ToDo";
 import ToDoForm from "./ToDoForm";
 
-const ToDoList = () => {
+export default function ToDoList() {
   const filteredTodo: ToDoInterface[] = useRecoilValue(filteredTodoState);
 
   return (
@@ -17,6 +17,4 @@ const ToDoList = () => {
       ))}
     </div>
   );
-};
-
-export default ToDoList;
+}

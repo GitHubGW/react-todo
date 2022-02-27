@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { Category, categoryState } from "../atoms";
 
-const SelectForm = () => {
+export default function SelectForm() {
   const [category, setCategory] = useRecoilState<Category>(categoryState);
 
   const onInput = (event: React.FormEvent<HTMLSelectElement>): void => {
@@ -17,6 +17,4 @@ const SelectForm = () => {
       </select>
     </form>
   );
-};
-
-export default SelectForm;
+}

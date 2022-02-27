@@ -6,7 +6,7 @@ interface FormData {
   text: string;
 }
 
-const ToDoForm = () => {
+export default function ToDoForm() {
   const {
     register,
     handleSubmit,
@@ -34,6 +34,4 @@ const ToDoForm = () => {
       <button type="button">Add</button>
     </form>
   );
-};
-
-export default ToDoForm;
+}

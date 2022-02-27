@@ -1,7 +1,5 @@
 import ToDoList from "./components/ToDoList";
 
-const App = () => {
+export default function App() {
   return <ToDoList />;
-};
-
-export default App;
+}

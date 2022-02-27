@@ -1,7 +1,7 @@
 import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from "recoil";
 import { Category, ToDoInterface, todoState, TODO_LIST } from "../atoms";
 
-const ToDo = ({ id, category, text }: ToDoInterface) => {
+export default function ToDo({ id, category, text }: ToDoInterface) {
   const todo: ToDoInterface[] = useRecoilValue(todoState);
   const setTodo: SetterOrUpdater<ToDoInterface[]> = useSetRecoilState(todoState);
 
@@ -46,6 +46,4 @@ const ToDo = ({ id, category, text }: ToDoInterface) => {
       </button>
     </li>
   );
-};
-
-export default ToDo;
+}
