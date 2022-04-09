@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://githubgw.github.io/react-todo">
-    <img height="90" src="./previews/todo_logo.png" />
+    <img height="95" src="./previews/todo_logo.png" />
     <br /><br />
     <a display="block" href="https://githubgw.github.io/react-crypto-tracker">https://githubgw.github.io/react-todo</a>
     <br /><br />
