@@ -2,7 +2,7 @@
   <a href="https://githubgw.github.io/react-todo">
     <img height="95" src="./previews/todo_logo.png" />
     <br /><br />
-    <a display="block" href="https://githubgw.github.io/react-crypto-tracker">https://githubgw.github.io/react-todo</a>
+    <a display="block" href="https://githubgw.github.io/react-todo">https://githubgw.github.io/react-todo</a>
     <br /><br />
     <img height="700" src="./previews/1.gif" />
   </a>
