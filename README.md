@@ -1,29 +1,57 @@
-# React To Do
+<div align="center">
+  <a href="https://githubgw.github.io/react-todo">
+    <img height="90" src="./previews/todo_logo.png" />
+    <br /><br />
+    <a display="block" href="https://githubgw.github.io/react-crypto-tracker">https://githubgw.github.io/react-todo</a>
+    <br /><br />
+    <img height="700" src="./previews/1.gif" />
+  </a>
+</div>
 
-## 🔗 Demo
+## Table of contents
 
-https://githubgw.github.io/react-todo
+- 🔥 [Built with](#built-with)
+- 🌈 [Project](#project)
+- 📑 [Pages](#pages)
+- ⚙ [Features](#features)
+- 📝 [License](#license)
 
-## 🖥 Preview
-
-<img src="previews/preview1.gif" />
-
-## 🔥 Stack
+## Built with
 
 ### Front-end
 
-<img height="30" src="https://img.shields.io/badge/React-black?style=for-the-badge&logo=React&logoColor=#61DAFB"/> <img height="30" src="https://img.shields.io/badge/Typescript-black?style=for-the-badge&logo=Typescript&logoColor=3178C6"/>
+- `React`
+- `Typescript`
+- `Recoil`
+- `React Hook Form`
 
-## ✅ Packages
+### Deploy
 
-- [x] React
-- [x] Typescript
-- [x] Recoil
-- [x] React Hook Form
+- `GitHub`
 
-## ⚙ Features
+## Project
 
-- [x] To Do
-- [x] Doing
-- [x] Done
-- [x] Local Storage
+> 할 일 추가 및 삭제, 할 일 카테고리 변경
+
+- React Hook Form을 이용해 form의 유효성을 검사하고, 할 일을 추가 및 삭제할 수 있습니다.
+- Recoil을 이용해 할 일 목록과 카테고리의 상태를 변경하고, 관리합니다.
+  <br /><br />
+  <img height="700" src="./previews/1.gif" />
+
+## Pages
+
+> Root
+
+- 홈
+
+## Features
+
+### 📝 To Do
+
+- [x] 할 일 추가
+- [x] 할 일 삭제
+- [x] 할 일 카테고리 변경
+
+## License
+
+MIT
