@@ -1,9 +1,12 @@
 import { atom, RecoilValueReadOnly, selector } from "recoil";
 
+export const TODO_LIST = "TODO_LIST";
+
 export enum Category {
   TODO = "TODO",
   DOING = "DOING",
   DONE = "DONE",
+  ETC = "ETC",
 }
 
 export interface ToDoInterface {
@@ -12,12 +15,20 @@ export interface ToDoInterface {
   category: Category;
 }
 
-export const TODO_LIST = "TODO_LIST";
-const localStorageToDoList: ToDoInterface[] | [] = JSON.parse(localStorage.getItem("TODO_LIST") as string) || [];
+const getLocalStorageTodoList = (): ToDoInterface[] => {
+  const storedTodoList = localStorage.getItem(TODO_LIST);
+  return storedTodoList ? JSON.parse(storedTodoList) : [];
+};
 
-export const categoryState = atom<ToDoInterface["category"]>({ key: "categoryState", default: Category.TODO });
+export const categoryState = atom<ToDoInterface["category"]>({
+  key: "categoryState",
+  default: Category.TODO,
+});
 
-export const todoState = atom<ToDoInterface[]>({ key: "todoState", default: localStorageToDoList });
+export const todoState = atom<ToDoInterface[]>({
+  key: "todoState",
+  default: getLocalStorageTodoList(),
+});
 
 export const filteredTodoState: RecoilValueReadOnly<ToDoInterface[]> = selector({
   key: "filteredTodoState",

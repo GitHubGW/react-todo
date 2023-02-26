@@ -13,7 +13,7 @@ export default function ToDoList() {
       <SelectForm />
       <ToDoForm />
       {filteredTodo.map((todo: ToDoInterface) => (
-        <ToDo key={todo.id} {...todo} />
+        <ToDo key={todo.id} id={todo.id} text={todo.text} category={todo.category} />
       ))}
     </div>
   );

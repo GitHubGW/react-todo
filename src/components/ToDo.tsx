@@ -1,45 +1,47 @@
-import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from "recoil";
+import { useCallback } from "react";
+import { SetterOrUpdater, useSetRecoilState } from "recoil";
 import { Category, ToDoInterface, todoState, TODO_LIST } from "../atoms";
 
-export default function ToDo({ id, category, text }: ToDoInterface) {
-  const todo: ToDoInterface[] = useRecoilValue(todoState);
+export default function ToDo({ id, text, category }: ToDoInterface) {
   const setTodo: SetterOrUpdater<ToDoInterface[]> = useSetRecoilState(todoState);
 
-  const handleChangeCategory = (category: Category): void => {
-    setTodo((todo: ToDoInterface[]) => {
-      const foundTodoIndex: number = todo.findIndex((todoItem: ToDoInterface) => todoItem.id === id);
-      const frontTodo: ToDoInterface[] = todo.slice(0, foundTodoIndex);
-      const backTodo: ToDoInterface[] = todo.slice(foundTodoIndex + 1);
-      const newTodo: ToDoInterface = { id, text, category };
-      const newTodoList: ToDoInterface[] = [...frontTodo, newTodo, ...backTodo];
-      localStorage.setItem(TODO_LIST, JSON.stringify(newTodoList));
-      return newTodoList;
-    });
-  };
+  const handleChangeCategory = useCallback(
+    (category: Category) => {
+      setTodo((prevTodo) => {
+        const foundTodo = prevTodo.find((todo) => todo.id === id);
+        if (!foundTodo) {
+          return prevTodo;
+        }
+        const updatedTodo = { ...foundTodo, category };
+        const updatedTodoList = prevTodo.map((todo) => (todo.id === id ? updatedTodo : todo));
+        localStorage.setItem(TODO_LIST, JSON.stringify(updatedTodoList));
+        return updatedTodoList;
+      });
+    },
+    [id, setTodo]
+  );
 
-  const handleDeleteTodoItem = (id: number): void => {
-    const filteredTodo: ToDoInterface[] = todo.filter((todoItem: ToDoInterface) => todoItem.id !== id);
-    setTodo(filteredTodo);
-    localStorage.setItem(TODO_LIST, JSON.stringify(filteredTodo));
-  };
+  const handleDeleteTodoItem = useCallback(
+    (id: number) => {
+      setTodo((prevTodo) => {
+        const filteredTodo = prevTodo.filter((todo) => todo.id !== id);
+        localStorage.setItem(TODO_LIST, JSON.stringify(filteredTodo));
+        return filteredTodo;
+      });
+    },
+    [setTodo]
+  );
 
   return (
     <li>
       <span style={{ marginRight: "30px", fontSize: "18px", fontWeight: "bold" }}>{text}</span>
-      {category !== Category.TODO && (
-        <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.TODO)}>
-          To Do
-        </button>
-      )}
-      {category !== Category.DOING && (
-        <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.DOING)}>
-          Doing
-        </button>
-      )}
-      {category !== Category.DONE && (
-        <button style={{ margin: "5px" }} onClick={() => handleChangeCategory(Category.DONE)}>
-          Done
-        </button>
+      {Object.values(Category).map(
+        (value) =>
+          category !== value && (
+            <button key={value} type="button" onClick={() => handleChangeCategory(value)} style={{ marginRight: "5px" }}>
+              {value}
+            </button>
+          )
       )}
       <button style={{ margin: "5px" }} onClick={() => handleDeleteTodoItem(id)}>
         ❎
